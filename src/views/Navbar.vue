@@ -1,0 +1,87 @@
+<template>
+      <div class="horizontal-menu">
+      <nav class="navbar top-navbar col-lg-12 col-12 p-0">
+        <div class="nav-top flex-grow-1">
+          <div class="container d-flex flex-row h-100 align-items-center">
+            <!-- <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+              <a class="navbar-brand brand-logo" href="index.html"><img src="assets/img/logo.svg"></a>
+              <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/img/logo.svg"></a>
+            </div> -->
+            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end flex-grow-1">
+              <ul class="navbar-nav navbar-nav-right">
+                <li class="nav-item nav-profile dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+                    Hi, Admin
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                    <a class="dropdown-item">
+                      <i class="mdi mdi-logout text-primary"></i>
+                      Logout
+                    </a>
+                  </div>
+                </li>
+              </ul>
+              <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
+                <span class="mdi mdi-menu"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <nav class="bottom-navbar">
+        <div class="container">
+          <ul class="nav page-navigation">
+            <li class="nav-item">
+                <router-link to="/" class="nav-link">
+				  <i class="mdi mdi-view-dashboard-outline menu-icon" aria-hidden="true">
+                   <span class="menu-title">Beranda</span>
+                  </i>
+				</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link to="/data_admin" class="nav-link">
+				  <i class="mdi mdi-account-settings menu-icon" aria-hidden="true">
+                   <span class="menu-title">Data Admin</span>
+                  </i>
+				</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link to="/data_siswa" class="nav-link">
+				  <i class="mdi mdi-file-document-box-outline menu-icon" aria-hidden="true">
+                   <span class="menu-title">Data Siswa</span>
+                  </i>
+				</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link to="/data_guru" class="nav-link">
+				  <i class="mdi mdi-codepen menu-icon" aria-hidden="true">
+                   <span class="menu-title">Data Guru</span>
+                  </i>
+				</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link to="/input_gambar" class="nav-link">
+				  <i class="mdi mdi-puzzle-outline menu-icon" aria-hidden="true">
+                   <span class="menu-title">Input Gambar</span>
+                  </i>
+				</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link to="/input_video" class="nav-link">
+				  <i class="mdi mdi-image-filter menu-icon" aria-hidden="true">
+                   <span class="menu-title">Input Video</span>
+                  </i>
+				</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link to="/input_quotes" class="nav-link">
+				  <i class="mdi mdi-image-filter menu-icon" aria-hidden="true">
+                   <span class="menu-title">Input Quotes</span>
+                  </i>
+				</router-link>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+</template>
