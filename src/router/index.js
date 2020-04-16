@@ -17,9 +17,19 @@ Vue.use(VueRouter)
 
   const routes = [
     {
+      path: '/login',
+      name: 'login',
+      components: {default: Login},
+    },
+    {
+      path: '/register',
+      name: 'register',
+      components: {default: Register},
+    },
+    {
       path: '/',
       name: 'beranda',
-      components: {default: Beranda, header: Navbar, footer: Footer},
+      components: {default: Beranda, header: Navbar, },
       meta: { 
         requiresAuth: true
       }
@@ -27,7 +37,7 @@ Vue.use(VueRouter)
   {
     path: '/data_admin',
     name: 'data_admin',
-    components: {default: DataAdmin, header: Navbar, footer: Footer},
+    components: {default: DataAdmin, header: Navbar, },
     meta: { 
       requiresAuth: true
     }
@@ -35,7 +45,7 @@ Vue.use(VueRouter)
   {
     path: '/data_siswa',
     name: 'data_siswa',
-    components: {default: DataSiswa, header: Navbar, footer: Footer},
+    components: {default: DataSiswa, header: Navbar,},
     meta: { 
       requiresAuth: true
     }
@@ -43,7 +53,7 @@ Vue.use(VueRouter)
   {
     path: '/data_guru',
     name: 'data_guru',
-    components: {default: DataGuru, header: Navbar, footer: Footer},
+    components: {default: DataGuru, header: Navbar, },
     meta: { 
       requiresAuth: true
     }
@@ -51,7 +61,7 @@ Vue.use(VueRouter)
   {
     path: '/input_gambar',
     name: 'input_gambar',
-    components: {default: InputGambar, header: Navbar, footer: Footer},
+    components: {default: InputGambar, header: Navbar,},
     meta: { 
       requiresAuth: true
     }
@@ -59,7 +69,7 @@ Vue.use(VueRouter)
   {
     path: '/input_video',
     name: 'input_video',
-    components: {default: InputVideo, header: Navbar, footer: Footer},
+    components: {default: InputVideo, header: Navbar, },
     meta: { 
       requiresAuth: true
     }
@@ -67,28 +77,33 @@ Vue.use(VueRouter)
   {
     path: '/input_quotes',
     name: 'input_quotes',
-    components: {default: InputQuotes, header: Navbar, footer: Footer},
+    components: {default: InputQuotes, header: Navbar, },
     meta: { 
       requiresAuth: true
     }
   },
-  {
-    path: '/login',
-    name: 'login',
-    components: {default: Login},
-  },
-  {
-    path: '/register',
-    name: 'register',
-    components: {default: Register},
-  },
+
 
 
 
 ]
 
 const router = new VueRouter({
-  routes
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes: routes
+})
+
+router.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters.isLoggedIn) {
+      next()
+      return
+    }
+    next('/login') 
+  } else {
+    next() 
+  }
 })
 
 export default router

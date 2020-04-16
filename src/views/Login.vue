@@ -11,7 +11,7 @@
                 </div> -->
                 <h4>Selamat datang!</h4>
                 <h6 class="font-weight-light">Login Konsline</h6>
-                <form class="pt-3" method="post" action="#">
+                 <form v-on:submit.prevent="Login" class="pt-3" method="post">
                 <div class="form-group">    
                   <div class="input-group">
                     <div class="input-group-prepend bg-transparent">
@@ -19,7 +19,7 @@
                         <i class="mdi mdi-account-outline text-primary"></i>
                       </span>
                     </div>
-                    <input type="email" class="form-control form-control-lg border-left-0" id="email" name="email" placeholder="E-Mail" required>
+                    <input v-model="email" type="email" class="form-control form-control-lg border-left-0" id="email" name="email" placeholder="Email" required>
                   </div>
                 </div>
                 <div class="form-group">
@@ -29,7 +29,7 @@
                         <i class="mdi mdi-lock-outline text-primary"></i>
                       </span>
                     </div>
-                    <input type="password" class="form-control form-control-lg border-left-0" name="password" id="password" placeholder="Kata Sandi" required>                        
+                    <input v-model="password" type="password" class="form-control form-control-lg border-left-0" name="password" id="password" placeholder="Password" required>                        
                   </div>
                 </div>
                 <div class="my-3">
@@ -46,3 +46,23 @@
     <!-- page-body-wrapper ends -->
   </div>
 </template>
+
+<script>
+export default {
+    data() {
+      return {
+        email: '',
+        password: ''
+      }
+    },
+    methods: {
+        Login: function(){
+            let email = this.email //let itu variabel baru
+            let password = this.password
+            this.$store.dispatch('login', { email, password })
+            .then(() => this.$router.push('/'))
+            .catch(err => console.log(err))
+        }
+    }
+}
+</script>
