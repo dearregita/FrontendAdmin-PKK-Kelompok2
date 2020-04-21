@@ -26,16 +26,16 @@ Vue.use(VueRouter)
       name: 'register',
       components: {default: Register},
     },
-    {
-      path: '/',
-      name: 'beranda',
-      components: {default: Beranda, header: Navbar, },
-      meta: { 
-        requiresAuth: true
-      }
-    },
+    // {
+    //   path: '/',
+    //   name: 'beranda',
+    //   components: {default: Beranda, header: Navbar, },
+    //   meta: { 
+    //     requiresAuth: true
+    //   }
+    // },
   {
-    path: '/data_admin',
+    path: '/',
     name: 'data_admin',
     components: {default: DataAdmin, header: Navbar, },
     meta: { 

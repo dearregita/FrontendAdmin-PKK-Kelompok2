@@ -114,12 +114,24 @@
                 <input type="text" name="nama_siswa" class="form-control" id="nama_siswa" placeholder="Nama Siswa" v-model="nama_siswa">
               </div>
               <div class="form-group">
+                <label for="email" class="col-form-label">Email</label>
+                <input type="email" name="email" class="form-control" id="email" placeholder="Email" v-model="email">
+              </div>
+              <div class="form-group">
                 <label for="nama" class="col-form-label">Kelas</label>
                 <input type="text" name="kelas" class="form-control" id="kelas" placeholder="Kelas" v-model="kelas">
               </div>
               <div class="form-group">
                 <label for="sekolah" class="col-form-label">Sekolah</label>
                 <input type="text" name="sekolah" class="form-control" id="sekolah" placeholder="Sekolah" v-model="sekolah">
+              </div>
+              <div class="form-group">
+                <label for="kategori" class="col-form-label">Kategori</label>
+                <input type="text" name="kategori" class="form-control" id="kategori" placeholder="Kategori" v-model="kategori">
+              </div>
+              <div class="form-group">
+                <label for="password" class="col-form-label">Password</label>
+                <input type="password" name="password" class="form-control" id="password" placeholder="Password" v-model="password">
               </div>
           </form>
         </b-modal>
@@ -185,8 +197,11 @@ module.exports = {
       id: "",
       nis: "",
       nama_siswa: "",
+      email: "",
       kelas: "",
       sekolah: "",
+      kategori:"",
+      password:"",
       action: "",
       message: "",
       currentPage: 1,
@@ -194,7 +209,7 @@ module.exports = {
       perPage: 10,
       key: "",
       siswa: [],
-      fields: ["id", "nis", "nama_siswa", "kelas","sekolah", "Aksi"],
+      fields: ["id", "nis", "nama_siswa", "email", "kelas","sekolah","kategori", "Aksi"],
     }
   },
 
@@ -234,8 +249,11 @@ module.exports = {
       this.action     = "insert";
       this.nis        = "";
       this.nama_siswa = "";
+      this.email      = "";
       this.kelas      = ""; 
       this.sekolah    = ""; 
+      this.kategori   = "";
+      this.password   = "";
     },
 
     Edit : function(item){
@@ -243,8 +261,11 @@ module.exports = {
       this.id         = item.id;
       this.nis        = item.nis;
       this.nama_siswa = item.nama_siswa;
+      this.email      = item.email;
       this.kelas      = item.kelas;
       this.sekolah    = item.sekolah;
+      this.kategori   = item.kategori;
+      this.password   = item.password;
     },
 
     Save : function(){
@@ -255,8 +276,11 @@ module.exports = {
         form.append("id", this.id);
         form.append("nis", this.nis);
         form.append("nama_siswa", this.nama_siswa);
+        form.append("email", this.email);
         form.append("kelas", this.kelas);
         form.append("sekolah", this.sekolah);
+        form.append("kategori", this.kategori);
+        form.append("password", this.password);
         form.append("role", this.role);
 
         this.axios.post("/siswa", form, conf)
@@ -277,8 +301,11 @@ module.exports = {
         let form = {
           nis       : this.nis,
           nama_siswa: this.nama_siswa,
+          email     : this.email,
           kelas     : this.kelas,
           sekolah   : this.sekolah,
+          kategori  : this.kategori,
+          password  : this.password,
           
         }
         this.axios.put("/siswa/" + this.id, form, conf)

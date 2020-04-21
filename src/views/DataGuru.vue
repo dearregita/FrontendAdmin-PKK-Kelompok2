@@ -105,16 +105,24 @@
 
               <form ref="form">
               <div class="form-group">
-                <label for="email" class="col-form-label">Email</label>
-                <input type="email" name="email" class="form-control" id="email" placeholder="Email" v-model="email">
-              </div>
-              <div class="form-group">
                 <label for="nama" class="col-form-label">Nama Guru</label>
                 <input type="text" name="nama_guru" class="form-control" id="nama_guru" placeholder="Nama Guru" v-model="nama_guru">
               </div>
               <div class="form-group">
+                <label for="email" class="col-form-label">Email</label>
+                <input type="email" name="email" class="form-control" id="email" placeholder="Email" v-model="email">
+              </div>
+              <div class="form-group">
                 <label for="sekolah" class="col-form-label">Sekolah</label>
                 <input type="text" name="sekolah" class="form-control" id="sekolah" placeholder="Sekolah" v-model="sekolah">
+              </div>
+               <div class="form-group">
+                <label for="kategori" class="col-form-label">Kategori</label>
+                <input type="text" name="kategori" class="form-control" id="kategori" placeholder="Kategori" v-model="kategori">
+              </div>
+              <div class="form-group">
+                <label for="password" class="col-form-label">Password</label>
+                <input type="password" name="password" class="form-control" id="password" placeholder="Password" v-model="password">
               </div>
           </form>
         </b-modal>
@@ -169,9 +177,11 @@ module.exports =  {
     return {
       search: "",
       id: "",
-      email: "",
       nama_guru: "",
+      email: "",
       sekolah: "",
+      kategori: "",
+      password: "",
       action: "",
       message: "",
       currentPage: 1,
@@ -179,7 +189,7 @@ module.exports =  {
       perPage: 10,
       key: "",
       guru: [],
-      fields: ["id", "email", "nama_guru","sekolah", "Aksi"],
+      fields: ["id","nama_guru", "email","sekolah", "kategori","Aksi"],
     }
   },
 
@@ -220,6 +230,8 @@ module.exports =  {
       this.email      = "";
       this.nama_guru  = "";
       this.sekolah    = ""; 
+      this.kategori   = "";
+      this.password   = "";
     },
 
      Edit : function(item){
@@ -228,6 +240,8 @@ module.exports =  {
       this.email      = item.email;
       this.nama_guru  = item.nama_guru;
       this.sekolah    = item.sekolah;
+      this.kategori   = item.kategori;
+      this.password   = item.password;
     },
 
      Save : function(){
@@ -239,6 +253,8 @@ module.exports =  {
         form.append("email", this.email);
         form.append("nama_guru", this.nama_guru);
         form.append("sekolah", this.sekolah);
+        form.append("kategori", this.kategori);
+        form.append("password", this.password);
         form.append("role", this.role);
 
         this.axios.post("/guru", form, conf)
@@ -260,6 +276,8 @@ module.exports =  {
           email     : this.email,
           nama_guru : this.nama_guru,
           sekolah   : this.sekolah,
+          kategori  : this.kategori,
+          password  : this.password,
           
         }
         this.axios.put("/guru/" + this.id, form, conf)

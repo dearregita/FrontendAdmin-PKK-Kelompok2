@@ -14,7 +14,7 @@
                     Hi, Admin
                   </a>
                   <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                    <a class="dropdown-item">
+                    <a @click="logout" class="dropdown-item">
                       <i class="mdi mdi-logout text-primary"></i>
                       Logout
                     </a>
@@ -31,57 +31,81 @@
       <nav class="bottom-navbar">
         <div class="container">
           <ul class="nav page-navigation">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <router-link to="/" class="nav-link">
-				  <i class="mdi mdi-view-dashboard-outline menu-icon" aria-hidden="true">
+				            <i class="mdi mdi-view-dashboard-outline menu-icon" aria-hidden="true">
                    <span class="menu-title">Beranda</span>
                   </i>
-				</router-link>
-            </li>
+				        </router-link>
+            </li> -->
             <li class="nav-item">
-                <router-link to="/data_admin" class="nav-link">
-				  <i class="mdi mdi-account-settings menu-icon" aria-hidden="true">
-                   <span class="menu-title">Data Admin</span>
+                <router-link to="/" class="nav-link">
+				            <i class="mdi mdi-account-settings menu-icon" aria-hidden="true">
+                   <span class="menu-title">Data User</span>
                   </i>
-				</router-link>
+				        </router-link>
             </li>
             <li class="nav-item">
                 <router-link to="/data_siswa" class="nav-link">
-				  <i class="mdi mdi-file-document-box-outline menu-icon" aria-hidden="true">
+				          <i class="mdi mdi-file-document-box-outline menu-icon" aria-hidden="true">
                    <span class="menu-title">Data Siswa</span>
                   </i>
-				</router-link>
+				        </router-link>
             </li>
             <li class="nav-item">
                 <router-link to="/data_guru" class="nav-link">
-				  <i class="mdi mdi-codepen menu-icon" aria-hidden="true">
-                   <span class="menu-title">Data Guru</span>
+				          <i class="mdi mdi-codepen menu-icon" aria-hidden="true">
+                  <span class="menu-title">Data Guru</span>
                   </i>
-				</router-link>
+				        </router-link>
             </li>
             <li class="nav-item">
                 <router-link to="/input_gambar" class="nav-link">
-				  <i class="mdi mdi-puzzle-outline menu-icon" aria-hidden="true">
+				           <i class="mdi mdi-puzzle-outline menu-icon" aria-hidden="true">
                    <span class="menu-title">Input Gambar</span>
                   </i>
-				</router-link>
+				        </router-link>
             </li>
             <li class="nav-item">
                 <router-link to="/input_video" class="nav-link">
-				  <i class="mdi mdi-image-filter menu-icon" aria-hidden="true">
-                   <span class="menu-title">Input Video</span>
+				          <i class="mdi mdi-image-filter menu-icon" aria-hidden="true">
+                  <span class="menu-title">Input Video</span>
                   </i>
-				</router-link>
+				    </router-link>
             </li>
             <li class="nav-item">
                 <router-link to="/input_quotes" class="nav-link">
-				  <i class="mdi mdi-image-filter menu-icon" aria-hidden="true">
+				          <i class="mdi mdi-image-filter menu-icon" aria-hidden="true">
                    <span class="menu-title">Input Quotes</span>
                   </i>
-				</router-link>
+				        </router-link>
             </li>
           </ul>
         </div>
       </nav>
     </div>
 </template>
+
+<script>
+export default {
+    name: 'navbar',
+    computed : {
+        isLoggedIn : function(){ return this.$store.getters.isLoggedIn}
+    },
+    methods:{
+      logout:function(){
+          let conf = { headers : {"Authorization" : "Bearer " + localStorage.getItem("Authorization")} };
+          let form = new FormData();
+          this.axios.post('/logout', form, conf).then(response => {
+            if (response.data.logged === false || response.data.status === 0) {
+                this.$store.commit('logout')
+                localStorage.removeItem("Authorization")
+                this.$router.push({name: 'login'})
+            }
+          }).catch(error => {
+
+        });
+      },
+  },
+}
+</script>
